@@ -61,3 +61,68 @@ Let's go through an example to understand the process:
     - Backtracking: `arr[1] = 0`
 
 Final array: `[1, 0, 1, 2, 3]`
+
+## Explanation of subString.java
+
+The `subString` class generates all possible substrings of a given string using recursion and backtracking. It explores two choices at each step: including or excluding the current character.
+
+### Step-by-Step Explanation
+
+1. **Base Case**:
+    ```java
+    if (i == str.length()) {
+        if (ans.length() == 0) {
+            System.out.println("null");
+        }
+        System.out.println(ans);
+        return;
+    }
+    ```
+    - If the current index `i` equals the length of the string, the recursion stops.
+    - If the accumulated substring `ans` is empty, "null" is printed.
+    - Otherwise, the accumulated substring is printed.
+
+2. **Recursive Cases**:
+    - **Include Current Character**:
+        ```java
+        findSubString(str, ans + str.charAt(i), i + 1);
+        ```
+        The current character is added to `ans`, and the function is called recursively with the next index.
+
+    - **Exclude Current Character**:
+        ```java
+        findSubString(str, ans, i + 1);
+        ```
+        The current character is excluded, and the function is called recursively with the next index.
+
+3. **Main Method**:
+    ```java
+    String str = "abc";
+    findSubString(str, "", 0);
+    ```
+    - The input string is initialized as `"abc"`.
+    - The `findSubString` method is called with the string, an empty substring, and the starting index `0`.
+
+### Example
+
+For the input string `"abc"`, the function generates the following substrings:
+
+1. Include `'a'`, `'b'`, `'c'`: `"abc"`
+2. Include `'a'`, `'b'`: `"ab"`
+3. Include `'a'`, exclude `'b'`, include `'c'`: `"ac"`
+4. Include `'a'`, exclude `'b'`, exclude `'c'`: `"a"`
+5. Exclude `'a'`, include `'b'`, `'c'`: `"bc"`
+6. Exclude `'a'`, include `'b'`: `"b"`
+7. Exclude `'a'`, exclude `'b'`, include `'c'`: `"c"`
+8. Exclude all characters: `"null"`
+
+Output:
+```
+abc
+ab
+ac
+a
+bc
+b
+c
+null
